@@ -1,0 +1,9 @@
+
+spring:
+  application:
+    name: dis-lock
+  redis:
+    host: redis1.dev.scsite.net
+    port: 6379
+server:
+  port: 8081
