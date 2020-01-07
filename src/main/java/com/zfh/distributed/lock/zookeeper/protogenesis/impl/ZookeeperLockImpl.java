@@ -1,6 +1,6 @@
 package com.zfh.distributed.lock.zookeeper.protogenesis.impl;
 
-import com.zfh.distributed.lock.zookeeper.protogenesis.ZookeeperLock;
+import com.zfh.distributed.lock.zookeeper.ZookeeperLock;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
@@ -94,7 +94,7 @@ public class ZookeeperLockImpl implements ZookeeperLock, Watcher {
             if (lockName.contains(splitStr)) {
                 throw new LockException("锁名有误");
             }
-            // 创建临时有序节点
+            // 创建临时有序节点 (临时有序节点，zK自动会在节点名称后面加序号)
             CURRENT_LOCK = zk.create(ROOT_LOCK + "/" + lockName + splitStr, new byte[0],
                     ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
             System.out.println(Thread.currentThread().getName()+"："+CURRENT_LOCK + " 已经创建");
@@ -142,6 +142,7 @@ public class ZookeeperLockImpl implements ZookeeperLock, Watcher {
         return true;
     }
 
+    @Override
     public void unlock() {
         try {
             System.out.println("释放锁 " + CURRENT_LOCK);

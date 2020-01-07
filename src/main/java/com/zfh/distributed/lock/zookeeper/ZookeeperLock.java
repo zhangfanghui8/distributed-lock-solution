@@ -1,4 +1,4 @@
-package com.zfh.distributed.lock.zookeeper.protogenesis;
+package com.zfh.distributed.lock.zookeeper;
 
 import org.apache.zookeeper.KeeperException;
 
@@ -14,5 +14,6 @@ public interface ZookeeperLock {
     boolean tryLock();
     boolean waitForLock(String prev, long waitTime)throws KeeperException, InterruptedException ;
     boolean lock();
+    void unlock();
 
 }
