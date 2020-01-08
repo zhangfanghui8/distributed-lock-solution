@@ -30,5 +30,10 @@ public interface ZkLock {
      */
     Boolean unlock(String lockKey);
 
+    /**
+     * 关闭客户端
+     */
+    void closeClient();
+
 
 }

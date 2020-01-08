@@ -64,7 +64,7 @@ public class CuratorLockImpl implements ZkLock {
                 retryPolicy);
         curatorFramework.start();
     }
-
+    @Override
     public void closeClient(){
         if(Objects.nonNull(curatorFramework)){
             curatorFramework.close();
